@@ -18,3 +18,5 @@ Questions
 3) Correlation on returns or prices?
 4) Jump mean, jump vol and jump freq ...How to calculate?
 5) Inputs of Heston - level, volvol (volatility)
+6) Usage of ML into this project.
+7) CEV inputs
