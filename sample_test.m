@@ -12,9 +12,11 @@ DAL_R = Data1.DAL;
 p = Portfolio;
 p = estimateAssetMoments(p, Data1(:,1:6));
 p = setDefaultConstraints(p);
-weigths = estimateFrontier(p,6);
+weigths = estimateFrontier(p);
 plotFrontier(p);
 %%
+M = [AAPL_R, JPM_R, PFE_R, TSLA_R, CVX_R, DAL_R];
+correlation_matrix = corrcoef(M);
 %% Importing Stock Prices
 %Data2 = readtable("Stock Data.xlsx");
 %AAPL_S = Data2.AAPL;
