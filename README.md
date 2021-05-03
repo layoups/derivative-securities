@@ -20,3 +20,5 @@ Questions
 5) Inputs of Heston - level, volvol (volatility)
 6) Usage of ML into this project.
 7) CEV inputs
+8) If adding options to portfolio, then which volatility to consider to calculate volatility of portfolio.
+9) opitions payoff will be same as stock..so how?
