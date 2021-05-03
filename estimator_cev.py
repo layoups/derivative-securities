@@ -120,3 +120,5 @@ if __name__ == "__main__":
     # test(0.2,0.5,1.2)
     # test(0.,0.3,0.2)
     # test(0.,3,2)
+
+    # https://www.thekerneltrip.com/stochastic-calculus/estimate-cev-process/
