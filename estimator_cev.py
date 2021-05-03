@@ -57,8 +57,10 @@ if __name__ == "__main__":
 
     from cev import ProcessCEV
 
-    returns = pd.read_csv("Returns Data.xlsx", engine='c')
-    returns
+    returns_pd = pd.read_csv("Returns Data.xlsx")
+    returns_dict = returns_pd.to_dict("series")
+
+
 
 
 
