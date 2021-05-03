@@ -6,21 +6,40 @@ class EstimatorCEV:
 
     def __init__(self, dt):
         self._dt = dt
-        self._alpha0 = -5
+        self._alpha0 = 3
     
     def Estimate(self, trajectory):
-        sigma, gamma = self._evaluate_sigma_gamma(trajectory, self._alpha0)
+        alpha, Vt = self._estimate_alpha(trajectory)
+        sigma, gamma = self._evaluate_sigma_gamma(trajectory, alpha, Vt)
         if sigma == None:
             return None, None, None
         else:
             mu = self._estimate_mu(trajectory)
             return (mu, sigma, gamma)
 
+    def _get_alpha(self, u, V):
+        return -13 / 11 - 12 / 11 * u / V
+
+    def _estimate_alpha(self, trajectory):
+        u = self._estimate_mu(trajectory)
+        error = 10
+        eps = 1e-8
+        alpha = self._alpha0
+
+        while np.any(error > eps):
+            V = self._evaluate_Vt(trajectory, alpha)
+            new_alpha = self._get_alpha(u, V)
+            alpha = new_alpha
+            error = (alpha - new_alpha) ** 2
+        
+        return new_alpha, V
+
     def _log_increments(self, trajectory):
         return np.diff(trajectory) / trajectory[:-1]
     
     def _estimate_mu(self, trajectory):
         return np.mean(self._log_increments(trajectory)) / self._dt 
+        # return np.mean(trajectory)
 
     def _log_increments_alpha(self, trajectory, alpha):
         mod_increments = self._log_increments(trajectory ** (1 + alpha))
@@ -32,35 +51,44 @@ class EstimatorCEV:
         center = 2 * (lhs - rhs) / (alpha * self._dt)
         return center
 
-    def _evaluate_sigma_gamma(self, trajectory, alpha):
+    def _evaluate_sigma_gamma(self, trajectory, alpha, Vt):
         if np.any(trajectory <= 0):
             return None, None
-        
-        Vts = self._evaluate_Vt(trajectory, alpha)
-        if np.any(Vts <= 0):
+
+        Vt[np.where(Vt == 0)[0]] += 1e-8
+        logVt = np.log(Vt)
+
+        St = trajectory[:-1] 
+        if np.any(St <= 0):
             return None, None
-        logVts = np.log(Vts)
+        logSt = np.log(St)
 
-        Sts = trajectory[:-1]  # removes the last term as in eq. (5)
-        if np.any(Sts <= 0):
-            return None, None
-        logSts = np.log(Sts)
+        twos = 2 * np.ones(St.shape[0])
+        A = np.column_stack((twos, logSt))
 
-        ones = np.ones(Sts.shape[0])
-        A = np.column_stack((ones, logSts))
-
-        res = np.linalg.lstsq(A, logVts, rcond=-1)[0]
-        return (2 * np.exp(res[0] / 2), 0.5 * (res[1] + 2))
+        res = np.linalg.lstsq(A, logVt, rcond=-1)[0]
+        return (2 * np.exp(res[0]), 0.5 * (res[1] + 2))
 
 
 if __name__ == "__main__":
 
     from cev import ProcessCEV
 
-    returns_pd = pd.read_csv("Returns Data.xlsx")
-    returns_dict = returns_pd.to_dict("series")
+    df = pd.read_csv("Stock Data.csv")
+    stock_df = df[df.columns[1:6]]
+    stock_dict = stock_df.to_dict("series")
+
+    def get_stock_gamma(stock):
+        return EstimatorCEV(dt=1/252).Estimate(stock_dict[stock])[2]
 
 
+    for s in stock_dict:
+        print("Gamma for {} is {}".format(s, get_stock_gamma(s)))
+
+    gammas = {s: [get_stock_gamma(s)] for s in stock_dict}
+    gammas_df = pd.DataFrame.from_dict(gammas)
+    print(gammas_df)
+    gammas_df.to_csv("stock_gammas.csv")
 
 
 
@@ -72,7 +100,7 @@ if __name__ == "__main__":
         sample_sigma = []
         sample_gamma = []
 
-        for i in range(500):
+        for i in range(100):
             mu_est, sigma_est, gamma_est = EstimatorCEV(dt=dt).Estimate(ProcessCEV(
                 true_mu, true_sigma, true_gamma).Simulate(T, dt=dt))
             
@@ -91,4 +119,4 @@ if __name__ == "__main__":
     # test(0.2,0.5,0.8)
     # test(0.2,0.5,1.2)
     # test(0.,0.3,0.2)
-    # test(0.,0.5,2)
+    # test(0.,3,2)
