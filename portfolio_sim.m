@@ -56,6 +56,8 @@ cvx_gbm_sim = squeeze(gbm_stocks(:, 5, :));
 dal_gbm_sim = squeeze(gbm_stocks(:, 6, :));
 
 %% multi jump
+jumps = readtable("jumps.csv");
+
 JumpMean = 0.8 * ones(6, 1);
 JumpVol = 0.3 * ones(6, 1);       
 JumpFreq = 5;

@@ -26,7 +26,7 @@ class EstimatorCEV:
         eps = 1e-8
         alpha = self._alpha0
 
-        while np.any(error > eps):
+        while np.sum(error) > eps:
             V = self._evaluate_Vt(trajectory, alpha)
             new_alpha = self._get_alpha(u, V)
             alpha = new_alpha
