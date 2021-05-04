@@ -10,48 +10,48 @@ class EstimatorCEV:
     
     def Estimate(self, trajectory):
         alpha, Vt = self._estimate_alpha(trajectory)
-        sigma, gamma = self._evaluate_sigma_gamma(trajectory, alpha, Vt)
+        sigma, gamma = self._get_sigma_gamma(trajectory, alpha, Vt)
         if sigma == None:
             return None, None, None
         else:
-            mu = self._estimate_mu(trajectory)
+            mu = self._get_mu(trajectory)
             return (mu, sigma, gamma)
 
     def _get_alpha(self, u, V):
         return -13 / 11 - 12 / 11 * u / V
 
     def _estimate_alpha(self, trajectory):
-        u = self._estimate_mu(trajectory)
+        u = self._get_mu(trajectory)
         error = 10
         eps = 1e-8
         alpha = self._alpha0
 
         while np.sum(error) > eps:
-            V = self._evaluate_Vt(trajectory, alpha)
+            V = self._get_Vt(trajectory, alpha)
             new_alpha = self._get_alpha(u, V)
             alpha = new_alpha
             error = (alpha - new_alpha) ** 2
         
         return new_alpha, V
 
-    def _log_increments(self, trajectory):
+    def _first_diff(self, trajectory):
         return np.diff(trajectory) / trajectory[:-1]
     
-    def _estimate_mu(self, trajectory):
-        return np.mean(self._log_increments(trajectory)) / self._dt 
+    def _get_mu(self, trajectory):
+        return np.mean(self._first_diff(trajectory)) / self._dt 
         # return np.mean(trajectory)
 
-    def _log_increments_alpha(self, trajectory, alpha):
-        mod_increments = self._log_increments(trajectory ** (1 + alpha))
+    def _first_diff_alpha(self, trajectory, alpha):
+        mod_increments = self._first_diff(trajectory ** (1 + alpha))
         return mod_increments / (1 + alpha)
 
-    def _evaluate_Vt(self, trajectory, alpha):
-        lhs = self._log_increments_alpha(trajectory, alpha)
-        rhs = self._log_increments(trajectory)
+    def _get_Vt(self, trajectory, alpha):
+        lhs = self._first_diff_alpha(trajectory, alpha)
+        rhs = self._first_diff(trajectory)
         center = 2 * (lhs - rhs) / (alpha * self._dt)
         return center
 
-    def _evaluate_sigma_gamma(self, trajectory, alpha, Vt):
+    def _get_sigma_gamma(self, trajectory, alpha, Vt):
         if np.any(trajectory <= 0):
             return None, None
 
