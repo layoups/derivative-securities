@@ -7,3 +7,4 @@ for i = 1:length(put_strikes)
         put_payoffs(j,i) = max(put_strikes(i) - paths(end, j),0);    
     end
 end
+put_payoffs = mean(put_payoffs);

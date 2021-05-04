@@ -165,23 +165,23 @@ merton_amp_returns = [aapl_merton_amp_returns jpm_merton_amp_returns pfe_merton_
     cvx_merton_amp_returns dal_merton_amp_returns];
 
 %% final max options
-aapl_merton_max_price = price_lookback(aapl_merton_sim, rate, T, @min_final_payoff);
-aapl_merton_max_returns = mean(min_final_payoff(aapl_merton_sim));
+aapl_merton_max_price = price_lookback(aapl_merton_sim, rate, T, @final_max_payoff);
+aapl_merton_max_returns = mean(final_max_payoff(aapl_merton_sim));
 
-jpm_merton_max_price = price_lookback(jpm_merton_sim, rate, T, @min_final_payoff);
-jpm_merton_max_returns = mean(min_final_payoff(jpm_merton_sim));
+jpm_merton_max_price = price_lookback(jpm_merton_sim, rate, T, @final_max_payoff);
+jpm_merton_max_returns = mean(final_max_payoff(jpm_merton_sim));
 
-pfe_merton_max_price = price_lookback(pfe_merton_sim, rate, T, @min_final_payoff);
-pfe_merton_max_returns = mean(min_final_payoff(pfe_merton_sim));
+pfe_merton_max_price = price_lookback(pfe_merton_sim, rate, T, @final_max_payoff);
+pfe_merton_max_returns = mean(final_max_payoff(pfe_merton_sim));
 
-tsla_merton_max_price = price_lookback(tsla_merton_sim, rate, T, @min_final_payoff);
-tsla_merton_max_returns = mean(min_final_payoff(tsla_merton_sim));
+tsla_merton_max_price = price_lookback(tsla_merton_sim, rate, T, @final_max_payoff);
+tsla_merton_max_returns = mean(final_max_payoff(tsla_merton_sim));
 
-cvx_merton_max_price = price_lookback(cvx_merton_sim, rate, T, @min_final_payoff);
-cvx_merton_max_returns = mean(min_final_payoff(cvx_merton_sim));
+cvx_merton_max_price = price_lookback(cvx_merton_sim, rate, T, @final_max_payoff);
+cvx_merton_max_returns = mean(final_max_payoff(cvx_merton_sim));
 
-dal_merton_max_price = price_lookback(dal_merton_sim, rate, T, @min_final_payoff);
-dal_merton_max_returns = mean(min_final_payoff(dal_merton_sim));
+dal_merton_max_price = price_lookback(dal_merton_sim, rate, T, @final_max_payoff);
+dal_merton_max_returns = mean(final_max_payoff(dal_merton_sim));
 
 % max returns
 merton_max_returns = [aapl_merton_max_returns jpm_merton_max_returns pfe_merton_max_returns tsla_merton_max_returns ...

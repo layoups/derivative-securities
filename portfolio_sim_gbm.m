@@ -15,7 +15,7 @@ start = prices_mat(end, :)';
 
 DeltaTime = 1/360;
 nobs = 360;
-nTrials = 1;
+nTrials = 5;
 
 num = size(sigma);
 
@@ -161,23 +161,23 @@ gbm_amp_returns = [aapl_gbm_amp_returns jpm_gbm_amp_returns pfe_gbm_amp_returns 
     cvx_gbm_amp_returns dal_gbm_amp_returns];
 
 %% final max options
-aapl_gbm_max_price = price_lookback(aapl_gbm_sim, rate, T, @min_final_payoff);
-aapl_gbm_max_returns = mean(min_final_payoff(aapl_gbm_sim));
+aapl_gbm_max_price = price_lookback(aapl_gbm_sim, rate, T, @final_max_payoff);
+aapl_gbm_max_returns = mean(final_max_payoff(aapl_gbm_sim));
 
-jpm_gbm_max_price = price_lookback(jpm_gbm_sim, rate, T, @min_final_payoff);
-jpm_gbm_max_returns = mean(min_final_payoff(jpm_gbm_sim));
+jpm_gbm_max_price = price_lookback(jpm_gbm_sim, rate, T, @final_max_payoff);
+jpm_gbm_max_returns = mean(final_max_payoff(jpm_gbm_sim));
 
-pfe_gbm_max_price = price_lookback(pfe_gbm_sim, rate, T, @min_final_payoff);
-pfe_gbm_max_returns = mean(min_final_payoff(pfe_gbm_sim));
+pfe_gbm_max_price = price_lookback(pfe_gbm_sim, rate, T, @final_max_payoff);
+pfe_gbm_max_returns = mean(final_max_payoff(pfe_gbm_sim));
 
-tsla_gbm_max_price = price_lookback(tsla_gbm_sim, rate, T, @min_final_payoff);
-tsla_gbm_max_returns = mean(min_final_payoff(tsla_gbm_sim));
+tsla_gbm_max_price = price_lookback(tsla_gbm_sim, rate, T, @final_max_payoff);
+tsla_gbm_max_returns = mean(final_max_payoff(tsla_gbm_sim));
 
-cvx_gbm_max_price = price_lookback(cvx_gbm_sim, rate, T, @min_final_payoff);
-cvx_gbm_max_returns = mean(min_final_payoff(cvx_gbm_sim));
+cvx_gbm_max_price = price_lookback(cvx_gbm_sim, rate, T, @final_max_payoff);
+cvx_gbm_max_returns = mean(final_max_payoff(cvx_gbm_sim));
 
-dal_gbm_max_price = price_lookback(dal_gbm_sim, rate, T, @min_final_payoff);
-dal_gbm_max_returns = mean(min_final_payoff(dal_gbm_sim));
+dal_gbm_max_price = price_lookback(dal_gbm_sim, rate, T, @final_max_payoff);
+dal_gbm_max_returns = mean(final_max_payoff(dal_gbm_sim));
 
 % max returns
 gbm_max_returns = [aapl_gbm_max_returns jpm_gbm_max_returns pfe_gbm_max_returns tsla_gbm_max_returns ...

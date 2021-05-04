@@ -7,3 +7,4 @@ for i = 1:length(call_strikes)
         call_payoffs(j,i) = max(paths(end,j) - call_strikes(i),0);    
     end
 end
+call_payoffs = mean(call_payoffs);

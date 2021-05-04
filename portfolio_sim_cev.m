@@ -15,7 +15,7 @@ start = prices_mat(end, :)';
 
 DeltaTime = 1/360;
 nobs = 360;
-nTrials = 1;
+nTrials = 2;
 
 num = size(sigma);
 
@@ -164,23 +164,23 @@ CEV_amp_returns = [aapl_CEV_amp_returns jpm_CEV_amp_returns pfe_CEV_amp_returns 
     cvx_CEV_amp_returns dal_CEV_amp_returns];
 
 %% final max options
-aapl_CEV_max_price = price_lookback(aapl_CEV_sim, rate, T, @min_final_payoff);
-aapl_CEV_max_returns = mean(min_final_payoff(aapl_CEV_sim));
+aapl_CEV_max_price = price_lookback(aapl_CEV_sim, rate, T, @final_max_payoff);
+aapl_CEV_max_returns = mean(final_max_payoff(aapl_CEV_sim));
 
-jpm_CEV_max_price = price_lookback(jpm_CEV_sim, rate, T, @min_final_payoff);
-jpm_CEV_max_returns = mean(min_final_payoff(jpm_CEV_sim));
+jpm_CEV_max_price = price_lookback(jpm_CEV_sim, rate, T, @final_max_payoff);
+jpm_CEV_max_returns = mean(final_max_payoff(jpm_CEV_sim));
 
-pfe_CEV_max_price = price_lookback(pfe_CEV_sim, rate, T, @min_final_payoff);
-pfe_CEV_max_returns = mean(min_final_payoff(pfe_CEV_sim));
+pfe_CEV_max_price = price_lookback(pfe_CEV_sim, rate, T, @final_max_payoff);
+pfe_CEV_max_returns = mean(final_max_payoff(pfe_CEV_sim));
 
-tsla_CEV_max_price = price_lookback(tsla_CEV_sim, rate, T, @min_final_payoff);
-tsla_CEV_max_returns = mean(min_final_payoff(tsla_CEV_sim));
+tsla_CEV_max_price = price_lookback(tsla_CEV_sim, rate, T, @final_max_payoff);
+tsla_CEV_max_returns = mean(final_max_payoff(tsla_CEV_sim));
 
-cvx_CEV_max_price = price_lookback(cvx_CEV_sim, rate, T, @min_final_payoff);
-cvx_CEV_max_returns = mean(min_final_payoff(cvx_CEV_sim));
+cvx_CEV_max_price = price_lookback(cvx_CEV_sim, rate, T, @final_max_payoff);
+cvx_CEV_max_returns = mean(final_max_payoff(cvx_CEV_sim));
 
-dal_CEV_max_price = price_lookback(dal_CEV_sim, rate, T, @min_final_payoff);
-dal_CEV_max_returns = mean(min_final_payoff(dal_CEV_sim));
+dal_CEV_max_price = price_lookback(dal_CEV_sim, rate, T, @final_max_payoff);
+dal_CEV_max_returns = mean(final_max_payoff(dal_CEV_sim));
 
 % max returns
 CEV_max_returns = [aapl_CEV_max_returns jpm_CEV_max_returns pfe_CEV_max_returns tsla_CEV_max_returns ...
