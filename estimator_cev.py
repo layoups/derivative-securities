@@ -73,6 +73,7 @@ if __name__ == "__main__":
 
     df = pd.read_csv("Stock Data.csv")
     stock_df = df[df.columns[1:7]]
+
     stock_dict = stock_df.to_dict("series")
 
     def get_stock_gamma(stock):

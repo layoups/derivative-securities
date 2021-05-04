@@ -1,29 +1,11 @@
 clc
 clear all
 
-%% import data
-
-stock_returns = readtable("Returns Data.xlsx");
-stock_prices = readtable("Stock Data.xlsx");
-
-aapl_returns = stock_returns.AAPL;
-jpm_returns = stock_returns.JPM;
-pfe_returns = stock_returns.PFE;
-tsla_returns = stock_returns.TSLA;
-cvx_returns = stock_returns.CVX;
-dal_returns = stock_returns.DAL;
-
-aapl_prices = stock_prices.AAPL;
-jpm_prices = stock_prices.JPM;
-pfe_prices = stock_prices.PFE;
-tsla_prices = stock_prices.TSLA;
-cvx_prices = stock_prices.CVX;
-dal_prices = stock_prices.DAL;
 
 %% simulation parameters
 
-returns_mat = [aapl_returns jpm_returns pfe_returns tsla_returns cvx_returns dal_returns];
-prices_mat = [aapl_prices jpm_prices pfe_prices tsla_prices cvx_prices dal_prices];
+returns_mat = table_to_list("Returns Data.csv", 0);
+prices_mat = table_to_list("Stock Data.csv", 0);
 
 corr_returns = corrcoef(returns_mat);
 corr_prices = corrcoef(prices_mat);
@@ -55,12 +37,10 @@ tsla_gbm_sim = squeeze(gbm_stocks(:, 4, :));
 cvx_gbm_sim = squeeze(gbm_stocks(:, 5, :));
 dal_gbm_sim = squeeze(gbm_stocks(:, 6, :));
 
-%% multi jump
-jumps = readtable("jumps.csv");
-
-JumpMean = 0.8 * ones(6, 1);
-JumpVol = 0.3 * ones(6, 1);       
-JumpFreq = 5;
+%% multi jump 
+JumpMean = table_to_list("jumps.csv", 2)';
+JumpVol = table_to_list("jumps.csv", 3)';
+JumpFreq = 252/10/360;
 
 mert = merton(mean_returns, sigma, ...
     JumpFreq, JumpMean, JumpVol, ...
@@ -82,4 +62,25 @@ tsla_merton_sim = squeeze(merton_stocks(:, 4, :));
 cvx_merton_sim = squeeze(merton_stocks(:, 5, :));
 dal_merton_sim = squeeze(merton_stocks(:, 6, :));
 
+
+%% CEV parameters
+alphas = table_to_list("stock_gammas.csv", 0)';
+
+%% CEV model
+CEV = cev(mean_returns, alphas, sigma, ...
+    'StartState', start, ...
+    'correlation', corr_returns);
+
+%% CEV sim
+
+CEV_stocks = simulate(CEV, nobs, ...
+ 'DeltaTime', DeltaTime, ...
+ 'nTrials', nTrials);
+
+aapl_CEV_sim = squeeze(CEV_stocks(:, 1, :));
+jpm_CEV_sim = squeeze(CEV_stocks(:, 2, :));
+pfe_CEV_sim = squeeze(CEV_stocks(:, 3, :));
+tsla_CEV_sim = squeeze(CEV_stocks(:, 4, :));
+cvx_CEV_sim = squeeze(CEV_stocks(:, 5, :));
+dal_CEV_sim = squeeze(CEV_stocks(:, 6, :));
 
