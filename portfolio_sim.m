@@ -29,7 +29,6 @@ gbm_stocks = simulate(gbm, nobs, ...
     'DeltaTime', DeltaTime,...    
     'nTrials', nTrials);
 
-%%
 aapl_gbm_sim = squeeze(gbm_stocks(:, 1, :));
 jpm_gbm_sim = squeeze(gbm_stocks(:, 2, :));
 pfe_gbm_sim = squeeze(gbm_stocks(:, 3, :));
@@ -52,8 +51,6 @@ mert = merton(mean_returns, sigma, ...
 merton_stocks = simulate(mert, nobs, ...
  'DeltaTime', DeltaTime, ...
  'nTrials', nTrials);
-
-%%
 
 aapl_merton_sim = squeeze(merton_stocks(:, 1, :));
 jpm_merton_sim = squeeze(merton_stocks(:, 2, :));
