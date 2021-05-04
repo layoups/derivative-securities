@@ -46,6 +46,7 @@ tsla_gbm_returns = mean(stock_returns(tsla_gbm_sim));
 cvx_gbm_returns = mean(stock_returns(cvx_gbm_sim));
 dal_gbm_returns = mean(stock_returns(dal_gbm_sim));
 
+% stock returns
 gbm_returns = [aapl_gbm_returns jpm_gbm_returns pfe_gbm_returns tsla_gbm_returns cvx_gbm_returns dal_gbm_returns];
 
 %% call options
@@ -85,9 +86,11 @@ dal_strike_step = (dal_max_strike - dal_min_strike) / 7;
 [dal_gbm_call_price, dal_strikes] = price_call(dal_gbm_sim, dal_strike_step, dal_min_strike, dal_max_strike, nTrials, rate, T);
 dal_gbm_call_returns = call_returns(dal_gbm_sim, dal_strike_step, dal_min_strike, dal_max_strike, nTrials)'; 
 
+% call returns
 gbm_call_returns = [aapl_gbm_call_returns jpm_gbm_call_returns pfe_gbm_call_returns tsla_gbm_call_returns ...
     cvx_gbm_call_returns dal_gbm_call_returns];
 
+% call strikes
 gbm_call_strikes = [aapl_strikes' jpm_strikes' pfe_strikes' tsla_strikes' cvx_strikes' dal_strikes'];
 
 %% put options
@@ -127,9 +130,11 @@ dal_strike_step = (dal_max_strike - dal_min_strike) / 7;
 [dal_gbm_put_price, dal_strikes] = price_put(dal_gbm_sim, dal_strike_step, dal_min_strike, dal_max_strike, nTrials, rate, T);
 dal_gbm_put_returns = put_returns(dal_gbm_sim, dal_strike_step, dal_min_strike, dal_max_strike, nTrials)'; 
 
+% put returns
 gbm_put_returns = [aapl_gbm_put_returns jpm_gbm_put_returns pfe_gbm_put_returns tsla_gbm_put_returns ...
     cvx_gbm_put_returns dal_gbm_put_returns];
 
+% call strikes
 gbm_put_strikes = [aapl_strikes' jpm_strikes' pfe_strikes' tsla_strikes' cvx_strikes' dal_strikes'];
 
 %% Amp options
@@ -151,6 +156,7 @@ cvx_gbm_amp_returns = mean(amplitude_payoff(cvx_gbm_sim));
 dal_gbm_amp_price = price_lookback(dal_gbm_sim, rate, T, @amplitude_payoff);
 dal_gbm_amp_returns = mean(amplitude_payoff(dal_gbm_sim));
 
+% amp returns
 gbm_amp_returns = [aapl_gbm_amp_returns jpm_gbm_amp_returns pfe_gbm_amp_returns tsla_gbm_amp_returns ...
     cvx_gbm_amp_returns dal_gbm_amp_returns];
 
@@ -173,6 +179,7 @@ cvx_gbm_max_returns = mean(min_final_payoff(cvx_gbm_sim));
 dal_gbm_max_price = price_lookback(dal_gbm_sim, rate, T, @min_final_payoff);
 dal_gbm_max_returns = mean(min_final_payoff(dal_gbm_sim));
 
+% max returns
 gbm_max_returns = [aapl_gbm_max_returns jpm_gbm_max_returns pfe_gbm_max_returns tsla_gbm_max_returns ...
     cvx_gbm_max_returns dal_gbm_max_returns];
 
@@ -195,5 +202,6 @@ cvx_gbm_min_returns = mean(min_final_payoff(cvx_gbm_sim));
 dal_gbm_min_price = price_lookback(dal_gbm_sim, rate, T, @min_final_payoff);
 dal_gbm_min_returns = mean(min_final_payoff(dal_gbm_sim));
 
+% min returns
 gbm_min_returns = [aapl_gbm_min_returns jpm_gbm_min_returns pfe_gbm_min_returns tsla_gbm_min_returns ...
     cvx_gbm_min_returns dal_gbm_min_returns];

@@ -49,6 +49,7 @@ tsla_CEV_returns = mean(stock_returns(tsla_CEV_sim));
 cvx_CEV_returns = mean(stock_returns(cvx_CEV_sim));
 dal_CEV_returns = mean(stock_returns(dal_CEV_sim));
 
+% stock returns
 CEV_returns = [aapl_CEV_returns jpm_CEV_returns pfe_CEV_returns tsla_CEV_returns cvx_CEV_returns dal_CEV_returns];
 
 %% call options
@@ -88,9 +89,11 @@ dal_strike_step = (dal_max_strike - dal_min_strike) / 7;
 [dal_CEV_call_price, dal_strikes] = price_call(dal_CEV_sim, dal_strike_step, dal_min_strike, dal_max_strike, nTrials, rate, T);
 dal_CEV_call_returns = call_returns(dal_CEV_sim, dal_strike_step, dal_min_strike, dal_max_strike, nTrials)'; 
 
+% call returns
 CEV_call_returns = [aapl_CEV_call_returns jpm_CEV_call_returns pfe_CEV_call_returns tsla_CEV_call_returns ...
     cvx_CEV_call_returns dal_CEV_call_returns];
 
+% call strikes
 CEV_call_strikes = [aapl_strikes' jpm_strikes' pfe_strikes' tsla_strikes' cvx_strikes' dal_strikes'];
 
 %% put options
@@ -130,9 +133,11 @@ dal_strike_step = (dal_max_strike - dal_min_strike) / 7;
 [dal_CEV_put_price, dal_strikes] = price_put(dal_CEV_sim, dal_strike_step, dal_min_strike, dal_max_strike, nTrials, rate, T);
 dal_CEV_put_returns = put_returns(dal_CEV_sim, dal_strike_step, dal_min_strike, dal_max_strike, nTrials)'; 
 
+% put returns
 CEV_put_returns = [aapl_CEV_put_returns jpm_CEV_put_returns pfe_CEV_put_returns tsla_CEV_put_returns ...
     cvx_CEV_put_returns dal_CEV_put_returns];
 
+% put strikes
 CEV_put_strikes = [aapl_strikes' jpm_strikes' pfe_strikes' tsla_strikes' cvx_strikes' dal_strikes'];
 
 %% Amp options
@@ -154,6 +159,7 @@ cvx_CEV_amp_returns = mean(amplitude_payoff(cvx_CEV_sim));
 dal_CEV_amp_price = price_lookback(dal_CEV_sim, rate, T, @amplitude_payoff);
 dal_CEV_amp_returns = mean(amplitude_payoff(dal_CEV_sim));
 
+% amp returns
 CEV_amp_returns = [aapl_CEV_amp_returns jpm_CEV_amp_returns pfe_CEV_amp_returns tsla_CEV_amp_returns ...
     cvx_CEV_amp_returns dal_CEV_amp_returns];
 
@@ -176,6 +182,7 @@ cvx_CEV_max_returns = mean(min_final_payoff(cvx_CEV_sim));
 dal_CEV_max_price = price_lookback(dal_CEV_sim, rate, T, @min_final_payoff);
 dal_CEV_max_returns = mean(min_final_payoff(dal_CEV_sim));
 
+% max returns
 CEV_max_returns = [aapl_CEV_max_returns jpm_CEV_max_returns pfe_CEV_max_returns tsla_CEV_max_returns ...
     cvx_CEV_max_returns dal_CEV_max_returns];
 
@@ -198,5 +205,6 @@ cvx_CEV_min_returns = mean(min_final_payoff(cvx_CEV_sim));
 dal_CEV_min_price = price_lookback(dal_CEV_sim, rate, T, @min_final_payoff);
 dal_CEV_min_returns = mean(min_final_payoff(dal_CEV_sim));
 
+% min returns
 CEV_min_returns = [aapl_CEV_min_returns jpm_CEV_min_returns pfe_CEV_min_returns tsla_CEV_min_returns ...
     cvx_CEV_min_returns dal_CEV_min_returns];

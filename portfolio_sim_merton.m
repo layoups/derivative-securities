@@ -51,6 +51,7 @@ tsla_merton_returns = mean(stock_returns(tsla_merton_sim));
 cvx_merton_returns = mean(stock_returns(cvx_merton_sim));
 dal_merton_returns = mean(stock_returns(dal_merton_sim));
 
+% stock returns
 merton_returns = [aapl_merton_returns jpm_merton_returns pfe_merton_returns tsla_merton_returns cvx_merton_returns dal_merton_returns];
 
 %% call options
@@ -90,9 +91,11 @@ dal_strike_step = (dal_max_strike - dal_min_strike) / 7;
 [dal_merton_call_price, dal_strikes] = price_call(dal_merton_sim, dal_strike_step, dal_min_strike, dal_max_strike, nTrials, rate, T);
 dal_merton_call_returns = call_returns(dal_merton_sim, dal_strike_step, dal_min_strike, dal_max_strike, nTrials)'; 
 
+% call returns
 merton_call_returns = [aapl_merton_call_returns jpm_merton_call_returns pfe_merton_call_returns tsla_merton_call_returns ...
     cvx_merton_call_returns dal_merton_call_returns];
 
+% call strikes
 merton_call_strikes = [aapl_strikes' jpm_strikes' pfe_strikes' tsla_strikes' cvx_strikes' dal_strikes'];
 
 %% put options
@@ -132,9 +135,10 @@ dal_strike_step = (dal_max_strike - dal_min_strike) / 7;
 [dal_merton_put_price, dal_strikes] = price_put(dal_merton_sim, dal_strike_step, dal_min_strike, dal_max_strike, nTrials, rate, T);
 dal_merton_put_returns = put_returns(dal_merton_sim, dal_strike_step, dal_min_strike, dal_max_strike, nTrials)'; 
 
+% put returns
 merton_put_returns = [aapl_merton_put_returns jpm_merton_put_returns pfe_merton_put_returns tsla_merton_put_returns ...
     cvx_merton_put_returns dal_merton_put_returns];
-
+% put strikes
 merton_put_strikes = [aapl_strikes' jpm_strikes' pfe_strikes' tsla_strikes' cvx_strikes' dal_strikes'];
 
 %% Amp options
@@ -156,6 +160,7 @@ cvx_merton_amp_returns = mean(amplitude_payoff(cvx_merton_sim));
 dal_merton_amp_price = price_lookback(dal_merton_sim, rate, T, @amplitude_payoff);
 dal_merton_amp_returns = mean(amplitude_payoff(dal_merton_sim));
 
+% amp returns
 merton_amp_returns = [aapl_merton_amp_returns jpm_merton_amp_returns pfe_merton_amp_returns tsla_merton_amp_returns ...
     cvx_merton_amp_returns dal_merton_amp_returns];
 
@@ -178,6 +183,7 @@ cvx_merton_max_returns = mean(min_final_payoff(cvx_merton_sim));
 dal_merton_max_price = price_lookback(dal_merton_sim, rate, T, @min_final_payoff);
 dal_merton_max_returns = mean(min_final_payoff(dal_merton_sim));
 
+% max returns
 merton_max_returns = [aapl_merton_max_returns jpm_merton_max_returns pfe_merton_max_returns tsla_merton_max_returns ...
     cvx_merton_max_returns dal_merton_max_returns];
 
@@ -200,5 +206,6 @@ cvx_merton_min_returns = mean(min_final_payoff(cvx_merton_sim));
 dal_merton_min_price = price_lookback(dal_merton_sim, rate, T, @min_final_payoff);
 dal_merton_min_returns = mean(min_final_payoff(dal_merton_sim));
 
+% min returns
 merton_min_returns = [aapl_merton_min_returns jpm_merton_min_returns pfe_merton_min_returns tsla_merton_min_returns ...
     cvx_merton_min_returns dal_merton_min_returns];
