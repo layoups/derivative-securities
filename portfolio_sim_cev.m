@@ -43,31 +43,30 @@ cvx_CEV_sim = squeeze(CEV_stocks(:, 5, :));
 dal_CEV_sim = squeeze(CEV_stocks(:, 6, :));
 
 %% call options
-[aapl_CEV_call_price, aapl_strikes] = price_call(aapl_CEV_sim, 5, 90, 130, nTrials, rate, T);
+[aapl_CEV_call_price, aapl_strikes] = price_call(aapl_CEV_sim, 5, round(aapl_CEV_sim(end) * (0.85)), round(aapl_CEV_sim(end) * (1.15)), nTrials, rate, T);
 
-[jpm_CEV_call_price, jpm_strikes] = price_call(jpm_CEV_sim, 5, 90, 130, nTrials, rate, T);
+[jpm_CEV_call_price, jpm_strikes] = price_call(jpm_CEV_sim, 5, round(jpm_CEV_sim(end) * (0.85)), round(jpm_CEV_sim(end) * (1.15)), nTrials, rate, T);
 
-[pfe_CEV_call_price, pfe_strikes] = price_call(pfe_CEV_sim, 5, 90, 130, nTrials, rate, T);
+[pfe_CEV_call_price, pfe_strikes] = price_call(pfe_CEV_sim, 5, round(pfe_CEV_sim(end) * (0.85)), round(pfe_CEV_sim(end) * (1.15)), nTrials, rate, T);
 
-[tsla_CEV_call_price, tsla_strikes] = price_call(tsla_CEV_sim, 5, 90, 130, nTrials, rate, T);
+[tsla_CEV_call_price, tsla_strikes] = price_call(tsla_CEV_sim, 5, round(tsla_CEV_sim(end) * (0.85)), round(tsla_CEV_sim(end) * (1.15)), nTrials, rate, T);
 
-[cvx_CEV_call_price, cvx_strikes] = price_call(cvx_CEV_sim, 5, 90, 130, nTrials, rate, T);
+[cvx_CEV_call_price, cvx_strikes] = price_call(cvx_CEV_sim, 5, round(cvx_CEV_sim(end) * (0.85)), round(cvx_CEV_sim(end) * (1.15)), nTrials, rate, T);
 
-[dal_CEV_call_price, dal_strikes] = price_call(dal_CEV_sim, 5, 90, 130, nTrials, rate, T);
+[dal_CEV_call_price, dal_strikes] = price_call(dal_CEV_sim, 5, round(dal_CEV_sim(end) * (0.85)), round(dal_CEV_sim(end) * (1.15)), nTrials, rate, T);
 
 %% put options
-[aapl_CEV_put_price, aapl_strikes] = price_put(aapl_CEV_sim, 5, 90, 130, nTrials, rate, T);
+[aapl_CEV_put_price, aapl_strikes] = price_put(aapl_CEV_sim, 5, round(aapl_CEV_sim(end) * (0.85)), round(aapl_CEV_sim(end) * (1.15)), nTrials, rate, T);
 
-[jpm_CEV_put_price, jpm_strikes] = price_put(jpm_CEV_sim, 5, 90, 130, nTrials, rate, T);
+[jpm_CEV_put_price, jpm_strikes] = price_put(jpm_CEV_sim, 5, round(jpm_CEV_sim(end) * (0.85)), round(jpm_CEV_sim(end) * (1.15)), nTrials, rate, T);
 
-[pfe_CEV_put_price, pfe_strikes] = price_put(pfe_CEV_sim, 5, 90, 130, nTrials, rate, T);
+[pfe_CEV_put_price, pfe_strikes] = price_put(pfe_CEV_sim, 5, round(pfe_CEV_sim(end) * (0.85)), round(pfe_CEV_sim(end) * (1.15)), nTrials, rate, T);
 
-[tsla_CEV_put_price, tsla_strikes] = price_put(tsla_CEV_sim, 5, 90, 130, nTrials, rate, T);
+[tsla_CEV_put_price, tsla_strikes] = price_put(tsla_CEV_sim, 5, round(tsla_CEV_sim(end) * (0.85)), round(tsla_CEV_sim(end) * (1.15)), nTrials, rate, T);
 
-[cvx_CEV_put_price, cvx_strikes] = price_put(cvx_CEV_sim, 5, 90, 130, nTrials, rate, T);
+[cvx_CEV_put_price, cvx_strikes] = price_put(cvx_CEV_sim, 5, round(cvx_CEV_sim(end) * (0.85)), round(cvx_CEV_sim(end) * (1.15)), nTrials, rate, T);
 
-[dal_CEV_put_price, dal_strikes] = price_put(dal_CEV_sim, 5, 90, 130, nTrials, rate, T);
-
+[dal_CEV_put_price, dal_strikes] = price_put(dal_CEV_sim, 5, round(dal_CEV_sim(end) * (0.85)), round(dal_CEV_sim(end) * (1.15)), nTrials, rate, T);
 %% Amp options
 aapl_CEV_amp_price = price_lookback(aapl_CEV_sim, rate, T, @amplitude_payoff);
 

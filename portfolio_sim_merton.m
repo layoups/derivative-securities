@@ -45,30 +45,30 @@ cvx_merton_sim = squeeze(merton_stocks(:, 5, :));
 dal_merton_sim = squeeze(merton_stocks(:, 6, :));
 
 %% call options
-[aapl_merton_call_price, aapl_strikes] = price_call(aapl_merton_sim, 5, 90, 130, nTrials, rate, T);
+[aapl_merton_call_price, aapl_strikes] = price_call(aapl_merton_sim, 5, round(aapl_merton_sim(end) * (0.85)), round(aapl_merton_sim(end) * (1.15)), nTrials, rate, T);
 
-[jpm_merton_call_price, jpm_strikes] = price_call(jpm_merton_sim, 5, 90, 130, nTrials, rate, T);
+[jpm_merton_call_price, jpm_strikes] = price_call(jpm_merton_sim, 5, round(jpm_merton_sim(end) * (0.85)), round(jpm_merton_sim(end) * (1.15)), nTrials, rate, T);
 
-[pfe_merton_call_price, pfe_strikes] = price_call(pfe_merton_sim, 5, 90, 130, nTrials, rate, T);
+[pfe_merton_call_price, pfe_strikes] = price_call(pfe_merton_sim, 5, round(pfe_merton_sim(end) * (0.85)), round(pfe_merton_sim(end) * (1.15)), nTrials, rate, T);
 
-[tsla_merton_call_price, tsla_strikes] = price_call(tsla_merton_sim, 5, 90, 130, nTrials, rate, T);
+[tsla_merton_call_price, tsla_strikes] = price_call(tsla_merton_sim, 5, round(tsla_merton_sim(end) * (0.85)), round(tsla_merton_sim(end) * (1.15)), nTrials, rate, T);
 
-[cvx_merton_call_price, cvx_strikes] = price_call(cvx_merton_sim, 5, 90, 130, nTrials, rate, T);
+[cvx_merton_call_price, cvx_strikes] = price_call(cvx_merton_sim, 5, round(cvx_merton_sim(end) * (0.85)), round(cvx_merton_sim(end) * (1.15)), nTrials, rate, T);
 
-[dal_merton_call_price, dal_strikes] = price_call(dal_merton_sim, 5, 90, 130, nTrials, rate, T);
+[dal_merton_call_price, dal_strikes] = price_call(dal_merton_sim, 5, round(dal_merton_sim(end) * (0.85)), round(dal_merton_sim(end) * (1.15)), nTrials, rate, T);
 
 %% put options
-[aapl_merton_put_price, aapl_strikes] = price_put(aapl_merton_sim, 5, 90, 130, nTrials, rate, T);
+[aapl_merton_put_price, aapl_strikes] = price_put(aapl_merton_sim, 5, round(aapl_merton_sim(end) * (0.85)), round(aapl_merton_sim(end) * (1.15)), nTrials, rate, T);
 
-[jpm_merton_put_price, jpm_strikes] = price_put(jpm_merton_sim, 5, 90, 130, nTrials, rate, T);
+[jpm_merton_put_price, jpm_strikes] = price_put(jpm_merton_sim, 5, round(jpm_merton_sim(end) * (0.85)), round(jpm_merton_sim(end) * (1.15)), nTrials, rate, T);
 
-[pfe_merton_put_price, pfe_strikes] = price_put(pfe_merton_sim, 5, 90, 130, nTrials, rate, T);
+[pfe_merton_put_price, pfe_strikes] = price_put(pfe_merton_sim, 5, round(pfe_merton_sim(end) * (0.85)), round(pfe_merton_sim(end) * (1.15)), nTrials, rate, T);
 
-[tsla_merton_put_price, tsla_strikes] = price_put(tsla_merton_sim, 5, 90, 130, nTrials, rate, T);
+[tsla_merton_put_price, tsla_strikes] = price_put(tsla_merton_sim, 5, round(tsla_merton_sim(end) * (0.85)), round(tsla_merton_sim(end) * (1.15)), nTrials, rate, T);
 
-[cvx_merton_put_price, cvx_strikes] = price_put(cvx_merton_sim, 5, 90, 130, nTrials, rate, T);
+[cvx_merton_put_price, cvx_strikes] = price_put(cvx_merton_sim, 5, round(cvx_merton_sim(end) * (0.85)), round(cvx_merton_sim(end) * (1.15)), nTrials, rate, T);
 
-[dal_merton_put_price, dal_strikes] = price_put(dal_merton_sim, 5, 90, 130, nTrials, rate, T);
+[dal_merton_put_price, dal_strikes] = price_put(dal_merton_sim, 5, round(dal_merton_sim(end) * (0.85)), round(dal_merton_sim(end) * (1.15)), nTrials, rate, T);
 
 %% Amp options
 aapl_merton_amp_price = price_lookback(aapl_merton_sim, rate, T, @amplitude_payoff);

@@ -40,30 +40,30 @@ cvx_gbm_sim = squeeze(gbm_stocks(:, 5, :));
 dal_gbm_sim = squeeze(gbm_stocks(:, 6, :));
 
 %% call options
-[aapl_gbm_call_price, aapl_strikes] = price_call(aapl_gbm_sim, 5, 90, 130, nTrials, rate, T);
+[aapl_gbm_call_price, aapl_strikes] = price_call(aapl_gbm_sim, 5, round(aapl_gbm_sim(end) * (0.85)), round(aapl_gbm_sim(end) * (1.15)), nTrials, rate, T);
 
-[jpm_gbm_call_price, jpm_strikes] = price_call(jpm_gbm_sim, 5, 90, 130, nTrials, rate, T);
+[jpm_gbm_call_price, jpm_strikes] = price_call(jpm_gbm_sim, 5, round(jpm_gbm_sim(end) * (0.85)), round(jpm_gbm_sim(end) * (1.15)), nTrials, rate, T);
 
-[pfe_gbm_call_price, pfe_strikes] = price_call(pfe_gbm_sim, 5, 90, 130, nTrials, rate, T);
+[pfe_gbm_call_price, pfe_strikes] = price_call(pfe_gbm_sim, 5, round(pfe_gbm_sim(end) * (0.85)), round(pfe_gbm_sim(end) * (1.15)), nTrials, rate, T);
 
-[tsla_gbm_call_price, tsla_strikes] = price_call(tsla_gbm_sim, 5, 90, 130, nTrials, rate, T);
+[tsla_gbm_call_price, tsla_strikes] = price_call(tsla_gbm_sim, 5, round(tsla_gbm_sim(end) * (0.85)), round(tsla_gbm_sim(end) * (1.15)), nTrials, rate, T);
 
-[cvx_gbm_call_price, cvx_strikes] = price_call(cvx_gbm_sim, 5, 90, 130, nTrials, rate, T);
+[cvx_gbm_call_price, cvx_strikes] = price_call(cvx_gbm_sim, 5, round(cvx_gbm_sim(end) * (0.85)), round(cvx_gbm_sim(end) * (1.15)), nTrials, rate, T);
 
-[dal_gbm_call_price, dal_strikes] = price_call(dal_gbm_sim, 5, 90, 130, nTrials, rate, T);
+[dal_gbm_call_price, dal_strikes] = price_call(dal_gbm_sim, 5, round(dal_gbm_sim(end) * (0.85)), round(dal_gbm_sim(end) * (1.15)), nTrials, rate, T);
 
 %% put options
-[aapl_gbm_put_price, aapl_strikes] = price_put(aapl_gbm_sim, 5, 90, 130, nTrials, rate, T);
+[aapl_gbm_put_price, aapl_strikes] = price_put(aapl_gbm_sim, 5, round(aapl_gbm_sim(end) * (0.85)), round(aapl_gbm_sim(end) * (1.15)), nTrials, rate, T);
 
-[jpm_gbm_put_price, jpm_strikes] = price_put(jpm_gbm_sim, 5, 90, 130, nTrials, rate, T);
+[jpm_gbm_put_price, jpm_strikes] = price_put(jpm_gbm_sim, 5, round(jpm_gbm_sim(end) * (0.85)), round(jpm_gbm_sim(end) * (1.15)), nTrials, rate, T);
 
-[pfe_gbm_put_price, pfe_strikes] = price_put(pfe_gbm_sim, 5, 90, 130, nTrials, rate, T);
+[pfe_gbm_put_price, pfe_strikes] = price_put(pfe_gbm_sim, 5, round(pfe_gbm_sim(end) * (0.85)), round(pfe_gbm_sim(end) * (1.15)), nTrials, rate, T);
 
-[tsla_gbm_put_price, tsla_strikes] = price_put(tsla_gbm_sim, 5, 90, 130, nTrials, rate, T);
+[tsla_gbm_put_price, tsla_strikes] = price_put(tsla_gbm_sim, 5, round(tsla_gbm_sim(end) * (0.85)), round(tsla_gbm_sim(end) * (1.15)), nTrials, rate, T);
 
-[cvx_gbm_put_price, cvx_strikes] = price_put(cvx_gbm_sim, 5, 90, 130, nTrials, rate, T);
+[cvx_gbm_put_price, cvx_strikes] = price_put(cvx_gbm_sim, 5, round(cvx_gbm_sim(end) * (0.85)), round(cvx_gbm_sim(end) * (1.15)), nTrials, rate, T);
 
-[dal_gbm_put_price, dal_strikes] = price_put(dal_gbm_sim, 5, 90, 130, nTrials, rate, T);
+[dal_gbm_put_price, dal_strikes] = price_put(dal_gbm_sim, 5, round(dal_gbm_sim(end) * (0.85)), round(dal_gbm_sim(end) * (1.15)), nTrials, rate, T);
 
 %% Amp options
 aapl_gbm_amp_price = price_lookback(aapl_gbm_sim, rate, T, @amplitude_payoff);
