@@ -58,12 +58,9 @@ class EstimatorCEV:
         Vt[np.where(Vt == 0)[0]] += 1e-8
         logVt = np.log(Vt)
 
-        St = trajectory[:-1] 
-        if np.any(St <= 0):
-            return None, None
-        logSt = np.log(St)
+        logSt = np.log(trajectory[:-1])
 
-        twos = 2 * np.ones(St.shape[0])
+        twos = 2 * np.ones(logSt.shape[0])
         A = np.column_stack((twos, logSt))
 
         res = np.linalg.lstsq(A, logVt, rcond=-1)[0]
@@ -75,7 +72,7 @@ if __name__ == "__main__":
     from cev import ProcessCEV
 
     df = pd.read_csv("Stock Data.csv")
-    stock_df = df[df.columns[1:6]]
+    stock_df = df[df.columns[1:7]]
     stock_dict = stock_df.to_dict("series")
 
     def get_stock_gamma(stock):
