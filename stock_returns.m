@@ -1,2 +1,4 @@
-function returns = stock_returns(paths)
-returns = mean((paths(end) - paths(1)) / paths(1));
+function [returns, pffs] = stock_returns(paths)
+temp = (paths(end, :) - paths(1, :)) ./ paths(1, :);
+returns = mean(temp);
+pffs = paths(end, :) - paths(1, :);
