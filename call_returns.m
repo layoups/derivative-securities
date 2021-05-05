@@ -1,4 +1,4 @@
-function call_payoffs = call_returns(paths, step, min_strike, max_strike, nTrials)
+function [call_payoffs, call_std] = call_returns(paths, step, min_strike, max_strike, nTrials)
 call_strikes = (min_strike:step:max_strike);
 call_payoffs = nan(1,length(call_strikes));
 
@@ -7,4 +7,6 @@ for i = 1:length(call_strikes)
         call_payoffs(j,i) = max(paths(end,j) - call_strikes(i),0);    
     end
 end
+
+call_std = std(call_payoffs);
 call_payoffs = mean(call_payoffs);
