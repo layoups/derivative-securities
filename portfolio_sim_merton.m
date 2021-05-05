@@ -9,13 +9,13 @@ prices_mat = table_to_list("Stock Data.csv", 0);
 corr_returns = corrcoef(returns_mat);
 corr_prices = corrcoef(prices_mat);
 
-mean_returns = 360 * diag(mean(returns_mat));
-sigma = sqrt(360) * diag(std(returns_mat));
+mean_returns = diag(mean(returns_mat));
+sigma =  diag(std(returns_mat));
 start = prices_mat(end, :)';
 
 DeltaTime = 1/360;
 nobs = 360;
-nTrials = 5;
+nTrials = 5000;
 
 num = size(sigma);
 
@@ -26,7 +26,7 @@ num_options = 7;
 %% multi jump 
 JumpMean = table_to_list("jumps.csv", 2)';
 JumpVol = table_to_list("jumps.csv", 3)';
-JumpFreq = 252/10;
+JumpFreq = 252/10/360;
 
 mert = merton(mean_returns, sigma, ...
     JumpFreq, JumpMean, JumpVol, ...
@@ -68,3 +68,4 @@ merton_stocks = simulate(mert, nobs, ...
     merton_amp_prices, merton_amp_returns, merton_amp_pffs, ...
     merton_max_prices, merton_max_returns, merton_max_pffs, ...
     merton_min_prices, merton_min_returns, merton_min_pffs);
+%%
