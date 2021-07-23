@@ -9,13 +9,13 @@ prices_mat = table_to_list("Stock Data.csv", 0);
 corr_returns = corrcoef(returns_mat);
 corr_prices = corrcoef(prices_mat);
 
-mean_returns = 360 * diag(mean(returns_mat));
-sigma = sqrt(360) * diag(std(returns_mat));
+mean_returns = diag(mean(returns_mat));
+sigma = diag(std(returns_mat));
 start = prices_mat(end, :)';
 
 DeltaTime = 1/360;
 nobs = 360;
-nTrials = 100;
+nTrials = 10000;
 
 num = size(sigma);
 

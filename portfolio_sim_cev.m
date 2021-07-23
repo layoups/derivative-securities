@@ -9,13 +9,13 @@ prices_mat = table_to_list("Stock Data.csv", 0);
 corr_returns = corrcoef(returns_mat);
 corr_prices = corrcoef(prices_mat);
 
-mean_returns = 360 * diag(mean(returns_mat));
-sigma = sqrt(360) * diag(std(returns_mat));
+mean_returns =  diag(mean(returns_mat));
+sigma = diag(std(returns_mat));
 start = prices_mat(end, :)';
 
 DeltaTime = 1/360;
 nobs = 360;
-nTrials = 10000;
+nTrials = 5000;
 
 num = size(sigma);
 
@@ -67,3 +67,5 @@ CEV_stocks = simulate(CEV, nobs, ...
     CEV_amp_prices, CEV_amp_returns, CEV_amp_pffs, ...
     CEV_max_prices, CEV_max_returns, CEV_max_pffs, ...
     CEV_min_prices, CEV_min_returns, CEV_min_pffs);
+%%
+plot(CEV_stocks(:,1,:))
